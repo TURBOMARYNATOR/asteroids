@@ -20,9 +20,7 @@ def main():
     clock = pygame.time.Clock()
     dt = 0.0
 
-    asteroid_score = 0
     font = pygame.font.Font(None, 32)
-    text = font.render(f"Score: {asteroid_score}", True, "White")
 
     drawable = pygame.sprite.Group()
     updatable = pygame.sprite.Group()
@@ -38,9 +36,12 @@ def main():
 
     asteroid_field = AsteroidField()
 
+    asteroid_score = 0
+
     while True:
         log_state()
         screen.fill("black")
+        text = font.render(f"Score: {asteroid_score}", True, "White")
         screen.blit(text, (640, 50))
 
         for d in drawable:
@@ -52,6 +53,7 @@ def main():
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
+
             for missle in shots:
                 if asteroid.collides_with(missle):
                     log_event("asteroid_shot")
